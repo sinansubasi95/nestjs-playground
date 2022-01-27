@@ -3,6 +3,8 @@ import { PowerModule } from 'src/power/power.module';
 import { CpuService } from './cpu.service';
 
 @Module({
-  providers: [CpuService, PowerModule]
+  imports: [PowerModule],
+  providers: [CpuService],
+  exports: [CpuService]
 })
 export class CpuModule { }
