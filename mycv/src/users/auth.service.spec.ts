@@ -49,7 +49,7 @@ describe('AuthService', () => {
     });
 
     it('throws an error if user signs up with email that is in use', async (done) => {
-        fakeUsersService.find = () => Promise.resolve([{ id: 1, email: 'a', password: '1' } as User]);
+        await service.signup('asdf@asdf.com', 'asdf');
 
         try {
             await service.signup('asdf@asdf.com', 'asdf');
@@ -68,7 +68,7 @@ describe('AuthService', () => {
 
 
     it('throws if an invalid password is provided', async (done) => {
-        fakeUsersService.find = () => Promise.resolve([{ email: 'qweqeq@weqe.qwe', password: 'qdwqdq' } as User]);
+        await service.signup('wqewq@ewwwqe.wqe', 'password');
 
         try {
             await service.signin('wqewq@ewwwqe.wqe', 'weqewqeq');
