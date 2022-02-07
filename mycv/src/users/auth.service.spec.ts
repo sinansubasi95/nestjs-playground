@@ -77,9 +77,9 @@ describe('AuthService', () => {
         }
     });
 
-    it('returns a user if correct password is provided', async (done) => {
+    it('returns a user if correct password is provided', async () => {
         await service.signup('asdf@asdf.com', 'mypassword');
         const user = await service.signin('asdf@asdf.com', 'mypassword');
         expect(user).toBeDefined();
-    })
+    });
 });
