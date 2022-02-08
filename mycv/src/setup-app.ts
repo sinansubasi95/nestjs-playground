@@ -7,9 +7,9 @@ export const setupApp = (app: any) => {
             keys: ['asdfasfd']
         })
     );
-    app.useGlobalPipes(
-        new ValidationPipe({
-            whitelist: true
-        })
-    );
+    // app.useGlobalPipes(
+    //     new ValidationPipe({
+    //         whitelist: true
+    //     })
+    // );
 }
