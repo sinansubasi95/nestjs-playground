@@ -2,7 +2,7 @@ import {
     NestInterceptor,
     ExecutionContext,
     CallHandler,
-    Injectable
+    Injectable,
 } from '@nestjs/common';
 import { UsersService } from '../users.service';
 

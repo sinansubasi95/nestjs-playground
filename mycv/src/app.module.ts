@@ -1,4 +1,5 @@
-import { MiddlewareConsumer, Module, ValidationPipe } from '@nestjs/common';
+import { Module, ValidationPipe, MiddlewareConsumer } from '@nestjs/common';
+import { APP_PIPE } from '@nestjs/core';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -6,19 +7,18 @@ import { UsersModule } from './users/users.module';
 import { ReportsModule } from './reports/reports.module';
 import { User } from './users/user.entity';
 import { Report } from './reports/report.entity';
-import { APP_PIPE } from '@nestjs/core';
 const cookieSession = require('cookie-session');
 
 @Module({
   imports: [
-    UsersModule,
-    ReportsModule,
     TypeOrmModule.forRoot({
       type: 'sqlite',
-      database: process.env.NODE_ENV === 'test' ? 'test.sqlite' : 'db.sqlite',
+      database: 'db.sqlite',
       entities: [User, Report],
-      synchronize: true
-    })
+      synchronize: true,
+    }),
+    UsersModule,
+    ReportsModule,
   ],
   controllers: [AppController],
   providers: [
@@ -26,9 +26,9 @@ const cookieSession = require('cookie-session');
     {
       provide: APP_PIPE,
       useValue: new ValidationPipe({
-        whitelist: true
-      })
-    }
+        whitelist: true,
+      }),
+    },
   ],
 })
 export class AppModule {
@@ -36,8 +36,8 @@ export class AppModule {
     consumer
       .apply(
         cookieSession({
-          keys: ['asdfasfd']
-        })
+          keys: ['asdfasfd'],
+        }),
       )
       .forRoutes('*');
   }
